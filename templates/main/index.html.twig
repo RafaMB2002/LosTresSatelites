@@ -3,7 +3,29 @@
 {% block title %}Los tres satelites{% endblock %}
 
 {% block header %}
-    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{absolute_url(path('landing_page'))}}">Los tres satelites</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{absolute_url(path('app_register'))}}">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{absolute_url(path('app_mensaje_form'))}}">Insertar Mensaje</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{absolute_url(path('gestion_mensajesJS'))}}">Validar Mensaje</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 {% endblock %}
 
 {% block body %}

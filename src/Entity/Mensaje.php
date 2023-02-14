@@ -30,7 +30,7 @@ class Mensaje
 
     #[ORM\ManyToOne(inversedBy: 'id_mensaje')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $id_user = null;
+    private ?User $id_user = null;
 
     public function getId(): ?int
     {

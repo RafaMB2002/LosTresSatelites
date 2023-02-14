@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Mensaje;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Mensaje>
@@ -16,9 +17,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MensajeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $manager;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $manager)
     {
         parent::__construct($registry, Mensaje::class);
+        $this->manager = $manager;
     }
 
     public function save(Mensaje $entity, bool $flush = false): void
@@ -37,6 +41,37 @@ class MensajeRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function saveMensaje($fecha_hora, $valido = false, $banda_id, $modo_id, $user_id)
+    {
+        $newMensaje = new Mensaje();
+
+        $newMensaje
+            ->setFechaHora($fecha_hora)
+            ->setValido($valido)
+            ->setBandaId($banda_id)
+            ->setModoId($modo_id)
+            ->setIdUser($user_id);
+
+        $this->manager->persist($newMensaje);
+        $this->manager->flush();
+
+        return $newMensaje;
+    }
+
+    public function updateMensaje(Mensaje $mensaje): Mensaje
+    {
+        $this->manager->persist($mensaje);
+        $this->manager->flush();
+
+        return $mensaje;
+    }
+
+    public function removeMesa(Mensaje $mensaje)
+    {
+        $this->manager->remove($mensaje);
+        $this->manager->flush();
     }
 
 //    /**
