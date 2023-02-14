@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainController extends AbstractController
+class ApiModoController extends AbstractController
 {
-    #[Route('/', name: 'landing_page')]
+    #[Route('/api/modo', name: 'app_api_modo')]
     public function index(): Response
     {
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        return $this->render('api_modo/index.html.twig', [
+            'controller_name' => 'ApiModoController',
         ]);
     }
 }
